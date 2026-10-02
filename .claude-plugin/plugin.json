@@ -1,0 +1,9 @@
+{
+  "name": "homoantropos",
+  "description": "Skills by a dabbler who believes AI should help us be more human: code-check triage for tired humans, PR comment intake, and a ladder that learns from every bug fix.",
+  "version": "0.1.0",
+  "author": { "name": "Serhii Antropov", "url": "https://github.com/SerhiiAntropov" },
+  "homepage": "https://github.com/homoantropos/skills",
+  "repository": "https://github.com/homoantropos/skills",
+  "license": "MIT"
+}

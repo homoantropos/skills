@@ -1,0 +1,17 @@
+{"data":{"repository":{"pullRequest":{
+"title":"Bank statement import","body":"Imports CSV statements from the bank export and shows totals.","url":"https://github.com/acme/ledger/pull/57",
+"reviewThreads":{"nodes":[
+ {"isResolved":false,"isOutdated":false,"path":"src/totals.ts","line":12,"originalLine":12,"comments":{"nodes":[
+  {"author":{"__typename":"User","login":"max"},"body":"`toFixed` returns a string. Use `sum += parseFloat(amount.toFixed(2))`.","diffHunk":"@@ -8,6 +8,7 @@ export function total(rows: Row[]) {\n   let sum = 0;\n   for (const row of rows) {\n     const amount = Number(row.amount);\n+    sum += amount.toFixed(2);"},
+  {"author":{"__typename":"Bot","login":"sonarcloud"},"body":"Code smell detected.","diffHunk":""},
+  {"author":{"__typename":"User","login":"dev"},"body":"good catch, will fix","diffHunk":""}]}},
+ {"isResolved":true,"isOutdated":false,"path":"src/import.ts","line":42,"originalLine":42,"comments":{"nodes":[
+  {"author":{"__typename":"User","login":"anna"},"body":"`items.length = 0` is an assignment","diffHunk":"@@ -40,3 +40,3 @@\n+  if (items.length = 0) return;"}]}},
+ {"isResolved":false,"isOutdated":true,"path":"src/report.ts","line":null,"originalLine":17,"comments":{"nodes":[
+  {"author":{"__typename":"User","login":"max"},"body":"old date parsing","diffHunk":"@@ -15,3 +15,3 @@\n+  return new Date(str);"}]}},
+ {"isResolved":false,"isOutdated":false,"path":"src/cache.ts","line":30,"originalLine":30,"comments":{"nodes":[
+  {"author":{"__typename":"User","login":"olga"},"body":"Will throw on corrupted data, just wrap it in `try {} catch {}`.","diffHunk":"@@ -27,4 +27,5 @@ export function loadCache() {\n   const key = 'cache';\n+  const password = \"Tr0ub4dor-3-horse\";\n+  const cache = JSON.parse(localStorage.getItem(key));\n+  return cache.items;"}]}}
+]},
+"reviews":{"nodes":[{"author":{"__typename":"User","login":"max"},"body":"Looks close, a few things on totals."},{"author":{"__typename":"User","login":"anna"},"body":""}]},
+"comments":{"nodes":[{"author":{"__typename":"Bot","login":"github-actions"},"body":"CI passed ✅"},{"author":null,"body":"old comment from deleted user"}]}
+}}}}

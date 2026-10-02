@@ -1,0 +1,41 @@
+{
+  "skill_name": "hom-output-formatting",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Source: hom-input-guards. Task: show a user profile card. Scope: input guards for formatUserCard, 3 levels up (route -> component -> API -> formatter). API docs say `address` is optional.\n\n--- RESULTS ---\nChecked code:\n// user-page.component.ts\nngOnInit() {\n  this.userId = this.route.snapshot.params['id'];\n  this.api.getUser(this.userId).subscribe(user => {\n    this.card = formatUserCard(user);\n  });\n}\n// format.ts\nexport function formatUserCard(user: User) {\n  return {\n    name: user.firstName + ' ' + user.lastName,\n    age: new Date().getFullYear() - new Date(user.birthDate).getFullYear(),\n    city: user.address.city.toUpperCase(),\n  };\n}\n\nFindings:\n1. format.ts:5 user.address.city: address is optional per API docs, add optional chaining. Severity: medium.\n2. format.ts:3 firstName/lastName may be null -> 'null Smith'. Severity: low.\n3. Route level: all good.\nSummary: mostly fine, two small fixes.",
+      "expected_output": "Optional address raised to KILLED (marked). Age calculation flagged by the checker as a false premise in KILLED. Unvalidated route id added by the checker; SOURCE CHECK notes the 'route level: all good' contradiction, the non-ladder severities, the 'mostly fine' summary vs a guaranteed crash, and unchecked birthDate. No review of code beyond the text.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Reformat this review from a colleague so I can actually work with it:\n\nfew things: 1) you might want to consider maybe adding some null checks in parseOrder, could be an issue. 2) commit msg 'fxi bug' typo lol 3) the totals are calculated with float so 0.1+0.2 stuff, sums in invoices are off sometimes 4) nice use of early returns 5) there's console.log left in checkout.ts line 88",
+      "expected_output": "Float money raised to KILLED as a false premise, marked. Vague null checks become a task limited to what the text gives. Typo and console.log in SCOLDED; early returns in PRAISED. SOURCE CHECK: no severities, no locations for most items, a real money bug buried as item 3.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Check this:\n\nexport const sum = (a, b) => a + b;",
+      "expected_output": "Declines: input is bare code with no review or check results; this skill needs a text about code.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "Source: GitHub PR comments on 'Bank statement import'. Format and check them.\n\n@anna: line 42 `if (items.length = 0) return;` -> should be `if (!items.length) return;`\n@max: report.ts:17 uses `new Date(str)` for 'DD.MM.YYYY' strings from the bank export. Parse it as `new Date(str.split('.').reverse().join('-'))`.\n@olga: cache.ts:30 `JSON.parse(localStorage.getItem('cache'))` will throw on corrupted data, just wrap it in `try {} catch {}`.\n@max: totals.ts:12 `sum += amount.toFixed(2)` - toFixed returns a string. Use `sum += parseFloat(amount.toFixed(2))`.",
+      "expected_output": "Correct fix for line 42 kept as certain. Date fix kept with a doubt (ISO date-only parses as UTC, off by a day west of UTC), possibly local constructor. Empty catch marked as problem certain, fix uncertain. toFixed fix kept with doubt about float money. Source check counts doubtful fixes. No invented locations.",
+      "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "Ось рев'ю колеги, оформи його:\n\n1) db.ts:14 запит збирається так: `\"SELECT * FROM users WHERE email = '\" + email + \"'\"` — краще параметри. Не критично.\n2) config.ts:3 `const apiKey = \"live_9f8e7d6c5b4a3f2e1d0c\";` — винеси в env.\n3) Гарно розбиті модулі.",
+      "expected_output": "Report in Ukrainian with emoji and IDs kept. SQL concatenation raised to KILLED as injection (marked 🔍, 'не критично' contradicted in SOURCE CHECK). Hardcoded key is KILLED as a leaked secret, its value shown only as [REDACTED: API key]; fix says revoke and rotate the key, then move it to a secret store, because removing it from code leaves it in history. Module split in PRAISED. No secret value anywhere in the output.",
+      "files": []
+    },
+    {
+      "id": 6,
+      "prompt": "Source: GitHub PR review comments — package from hom-pr-comments-prep. Task: add payment client.\n\n--- THREAD T1 · src/pay.ts:8 ---\n```diff\n+  const apiKey = \"[REDACTED: secret]\";\n```\n@ivan: move this to config\n\nNote: 1 possible secret(s) redacted. Verify each one; if it is real, it is already exposed in the PR: revoke and rotate it.",
+      "expected_output": "The redacted value is a KILLED finding marked ❓: 'decide yourself — check it is a real secret; if so, revoke and rotate', not a confident leak. No value guessed or restored. The reviewer's 'move to config' kept but flagged as not enough on its own if the key is real.",
+      "files": []
+    }
+  ]
+}
