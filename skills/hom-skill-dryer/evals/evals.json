@@ -1,0 +1,5 @@
+{"skill_name":"hom-skill-dryer","evals":[
+{"id":1,"prompt":"Dry skills/hom-human-readable","expected_output":"Description kept within 200 characters with every trigger kept; body untouched because hom-output-checker preloads it with no file tools; evals pass; overwritten; not committed.","files":[]},
+{"id":2,"prompt":"Dry the commit-writer skill","expected_output":"Inventory of all rules; monorepo rules moved to references/monorepo.md with a pointer; intro, repeated notes and extra examples removed; 3/3 evals equal to snapshot; overwritten.","files":[]},
+{"id":3,"prompt":"Slim down skill-x (it has no evals)","expected_output":"Measures, reports over budget, changes nothing, suggests writing evals first.","files":[]},
+{"id":4,"prompt":"Optimize hom-pr-comments-prep","expected_output":"Already within budget: reports numbers, stops without changes.","files":[]}]}

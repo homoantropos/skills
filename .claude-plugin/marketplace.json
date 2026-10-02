@@ -1,0 +1,12 @@
+{
+  "name": "homoantropos",
+  "description": "Skills by a dabbler who believes AI should help us be more human.",
+  "owner": { "name": "Serhii Antropov", "url": "https://github.com/SerhiiAntropov" },
+  "plugins": [
+    {
+      "name": "homoantropos",
+      "source": "./",
+      "description": "Code-check triage for tired humans, PR comment intake, and a severity ladder that learns from bug fixes."
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "skill_name": "hom-learn-from-fix",
+  "evals": [
+    {"id": 1, "prompt": "Fixed it: first-time visitors got a white screen, Sentry showed TypeError reading 'items' of null. There's no cart key on the first visit. Branch fix/acme-cart-crash, fix is staged (loadAcmeCart in shop-web/cart.ts now returns [] when localStorage has no 'acme_cart_v2').", "expected_output": "No ladder folder exists: asks once whether to keep it personal (~/.hom/ladder/) or team (<project>/.hom/ladder/). Then one generalized KILLED line appended to killed.md there, with no project names, paths or keys; notes that 'No input guards' in WOUNDED understated it. Skill files unchanged, no git commands, nothing pushed.", "files": []},
+    {"id": 2, "prompt": "Bug fixed: invoice totals were sometimes off by a cent because we summed amounts as floats. Now we sum integer cents. Commit: fix(invoices): sum in cents.", "expected_output": "Already covered by the base KILLED case (money in float) at the same level: nothing added, no question about where to store, nothing written.", "files": []},
+    {"id": 3, "prompt": "The list flickered on load, I added setTimeout(render, 100) and it's gone. Not sure why it flickered. Commit: fix: list flicker.", "expected_output": "Root cause unknown, fix is a workaround: nothing learned, explains why.", "files": []},
+    {"id": 4, "prompt": "Виправив: при повторному збереженні форми запис дублювався, бо кнопка не блокувалась до відповіді сервера, і два запити йшли паралельно. Тепер кнопка disabled до відповіді, а на бекенді — idempotency key. Комміт fix: double submit. У проєкті вже є .hom/ladder/.", "expected_output": "Report in Ukrainian. Uses the existing team ladder <project>/.hom/ladder/ without asking. Adds one generalized line (double submit without disabling or idempotency → duplicate records) at a level justified by real impact; reminds to commit .hom/ladder/ to share. No git commands run.", "files": []}
+  ]
+}

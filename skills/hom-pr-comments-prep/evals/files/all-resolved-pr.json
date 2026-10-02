@@ -1,0 +1,3 @@
+{"data":{"repository":{"pullRequest":{"title":"Fix typo","body":"","url":"https://github.com/acme/ledger/pull/58",
+"reviewThreads":{"nodes":[{"isResolved":true,"isOutdated":false,"path":"README.md","line":3,"originalLine":3,"comments":{"nodes":[{"author":{"__typename":"User","login":"anna"},"body":"typo","diffHunk":"@@"}]}}]},
+"reviews":{"nodes":[]},"comments":{"nodes":[{"author":{"__typename":"Bot","login":"dependabot[bot]"},"body":"bump"}]}}}}}

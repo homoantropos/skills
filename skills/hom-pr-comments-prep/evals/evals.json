@@ -1,0 +1,7 @@
+{
+  "skill_name": "hom-pr-comments-prep",
+  "evals": [
+    {"id": 1, "prompt": "Check the review comments on https://github.com/acme/ledger/pull/57", "expected_output": "Package keeps 3 open human threads with diff hunks (the report.ts one marked OUTDATED, so the checker asks to confirm it still applies) and 1 general comment, drops 1 resolved, 2 bot and 1 deleted-account comment, comments verbatim except the password in the cache.ts hunk, shown as [REDACTED: secret] (1 redacted) and reported by the checker as a possible leaked secret to verify, then revoke and rotate; checker report returned with a one-line count above it; scripts called by full path from the project directory, temp dir from mktemp removed at the end.", "files": ["evals/files/mixed-pr.json"]},
+    {"id": 2, "prompt": "Що лишилося на PR 58?", "expected_output": "Answers in Ukrainian. Nothing left: reports 1 resolved thread and 1 bot comment dropped, does not start the checker.", "files": ["evals/files/all-resolved-pr.json"]}
+  ]
+}
