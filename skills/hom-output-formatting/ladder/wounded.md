@@ -8,3 +8,14 @@
 - Async races, esp. storage read/write.
 - Memory leak (freezes the app → 🔴).
 - Security weakness with no shown exploit: unsafe defaults (debug on, CORS `*`), weak hashing or crypto, no rate limit on login.
+- A "blocked" flag derived from an item that the same pass's cleanup removes → the block vanishes and later dependent requests go out with references the server refuses.
+- A scan that skips a record it can't parse yet reports itself complete → cleanup deletes and relinks as if the record never existed; marking it incomplete without moving the bad record aside stalls everything behind it forever. Needs a corrupt write, but the damage is permanent.
+- A "moved from old key to new key" alias recorded in `finally` → recorded even when the move threw, so lookups go to the new key and the data under the old one is orphaned.
+- An input hidden on "data load failed" instead of on the one condition that forbids input (offline) → one failed load removes the main action with no explanation until a retry succeeds. Blocks the main path on a common failure.
+- A client timeout that abandons a still-running load and never applies its late answer → on slow networks the screen stays stale or in error though the data arrives seconds later. Likely on mobile, and a regression from no timeout.
+- A long-lived listener whose inner request can error without a catch inside the flattening operator → one failure ends the outer subscription and the feature is dead for the session. Beats the 🟡 "missing error handling" case: a feature is lost, not one call.
+- A "loaded" flag set in the branch where nothing could be loaded (offline, no cache) → reconnect sees "loaded" and never fetches, so the screen shows a false empty state on a normal offline→online path.
+- Long-press on images in a mobile WebView with native image drag left on → the platform starts a drag and cancels the pointer before the timer fires, so long-press never works on images on the device. Desktop tests pass.
+- Success reported for work that did not fully happen (partial match shown as "done", a bulk action in an error state resetting the local counter) → the user believes everything applied and finds the gap later. Silent partial success.
+- Listening to `focus` on a wrapper element → `focus` doesn't bubble, so the handler never fires on any wrapped field; use `focusin` and resolve the inner input. The feature silently does nothing.
+- A drag or animation that leaves an inline pixel size, with a baseline measured once at init → after the on-screen keyboard or viewport changes, the stale size overrides responsive CSS and the panel sits off-screen. Breaks the layout the user is typing in.

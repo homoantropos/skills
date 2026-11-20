@@ -8,3 +8,4 @@
 - App-wide UI rules ignored (dark mode…).
 - Stored data without schema version; stale keys.
 - Verbose code duplicating existing code.
+- A confirmation toast ("copied", "saved") shown even when the action did nothing (empty text, no change) → the user trusts a no-op. Small, but it teaches users to ignore the feedback.
